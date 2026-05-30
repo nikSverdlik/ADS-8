@@ -1,13 +1,16 @@
 // Copyright 2021 NNTU-CS
-#include "bst.h"
-#include <iostream>
-#include <fstream>
+#include <algorithm>
 #include <cctype>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include "bst.h"
 
 // чтение слов из файла и заполнение дерева
 void makeTree(BST<std::string>& tree, const char* filename) {
   std::ifstream file(filename);
-  
   if (!file.is_open()) {
     std::cout << "File not found!" << std::endl;
     return;
@@ -15,7 +18,6 @@ void makeTree(BST<std::string>& tree, const char* filename) {
 
   std::string word;
   char ch;
-  
   // читаем посимвольно
   while (file.get(ch)) {
     if (std::isalpha(static_cast<unsigned char>(ch))) {
@@ -46,7 +48,6 @@ void printFreq(BST<std::string>& tree) {
     });
 
   std::ofstream out("result/freq.txt");
-  
   for (const auto& p : words) {
     std::cout << p.first << " -> " << p.second << std::endl;
     out << p.first << " -> " << p.second << std::endl;
